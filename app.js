@@ -1,10 +1,12 @@
 const express = require("express");
 const morgan = require("morgan");
 const { environment } = require('./config');
+const tweetRouter = require("./routes/tweet");
 const app = express();
 
 app.use(morgan("dev"));
-
+app.use(express.json());
+app.use('/tweets',tweetRouter);
 app.get("/", (req, res) => {
   res.send("Welcome to the express-sequelize-starter!");
 });
