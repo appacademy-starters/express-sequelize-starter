@@ -1,42 +1,16 @@
 const express = require('express');
 const {Tweet, User} = require('../db/models');
 const router = express.Router();
-const {validationResult, check} = require('express-validator')
+// const {validationResult, check} = require('express-validator')
 const csrf = require('csurf');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const csrfProtection = csrf({cookie:true});
+const {handleValidationErrors, tweetNotFoundError} = require('../utils.js');
 
 router.use(cors({ origin: "http://localhost:4000" }));
 router.use(cookieParser());
 router.use(express.urlencoded({extended:false}));
-
-const handleValidationErrors = (req, res, next) => {
-    const validationErrors = validationResult(req);
-    if (!validationErrors.isEmpty()) {
-        const errors = validationErrors.array().map((error) => error.msg);
-    
-        const err = Error("Bad request.");
-        err.errors = errors;
-        err.status = 400;
-        err.title = "Bad request.";
-        return next(err);
-      }
-      next();
-}
-
-const tweetNotFoundError = async(req, res, next) => {
-    const tweetSearch = await Tweet.findByPk(req.params.id);
-
-    if(!tweetSearch) {
-        const err = Error("Tweet not found.");
-        err.status = 404;
-        err.title = "Tweet not found.";
-        next(err);
-    } 
-next();
-}
-
 
 router.get('/',async(req,res) => {
     const findTweets = await Tweet.findAll({

@@ -2,6 +2,7 @@ const express = require("express");
 const morgan = require("morgan");
 const { environment } = require('./config');
 const tweetRouter = require("./routes/tweet");
+const usersRouter = require('./routes/users');
 const cors = require('cors');
 const app = express();
 const path = require('path');
@@ -12,6 +13,7 @@ app.use(cors({ origin: "http://localhost:4000" }));
 app.use(morgan("dev"));
 app.use(express.json());
 app.use('/tweets',tweetRouter);
+app.use('/users',usersRouter);
 app.get("/", (req, res) => {
   res.send("Welcome to the express-sequelize-starter!");
 });
