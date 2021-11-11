@@ -1,0 +1,7 @@
+extends layout.pug
+block content
+    form(action="/tweets/new", method="post")
+        input(type="hidden" name="_csurf" value=csrfToken)
+        label(for="newTweet") Message:
+        textarea(name="newTweet", cols="30", rows="10")
+        button(type='submit') Submit
