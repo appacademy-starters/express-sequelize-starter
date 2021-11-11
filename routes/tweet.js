@@ -7,11 +7,14 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const csrfProtection = csrf({cookie:true});
 const {handleValidationErrors, tweetNotFoundError} = require('../utils.js');
+const { requireAuth } = require("../auth");
+
+// REST OF FILE NOT SHOWN
 
 router.use(cors({ origin: "http://localhost:4000" }));
 router.use(cookieParser());
 router.use(express.urlencoded({extended:false}));
-
+router.use(requireAuth);
 router.get('/',async(req,res) => {
     const findTweets = await Tweet.findAll({
         include: User

@@ -4,6 +4,7 @@ const {handleValidationErrors, tweetNotFoundError, asyncHandler} = require('../u
 const {User} = require('../db/models');
 const {getUserToken} = require('../auth.js');
 const {validationResult, check} = require('express-validator');
+const bcrypt = require('bcryptjs')
 
 const validateUsername =
   check("username")
