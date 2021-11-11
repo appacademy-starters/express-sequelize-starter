@@ -8,17 +8,20 @@ module.exports = {
           message: "The Martian was awesome!",
           createdAt: new Date(),
           updatedAt: new Date(),
+          userId: 1
         },
         {
           message: "Has anyone seen Ready Player One?",
           createdAt: new Date(),
           updatedAt: new Date(),
+          userId:2
         },
         {
           message:
             "Harry Potter and the Sorcerer's Stone is the best out of all seven HP books :).",
           createdAt: new Date(),
           updatedAt: new Date(),
+          userId:2
         }
       ], {});
     

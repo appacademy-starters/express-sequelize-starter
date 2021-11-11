@@ -2,8 +2,13 @@ const express = require("express");
 const morgan = require("morgan");
 const { environment } = require('./config');
 const tweetRouter = require("./routes/tweet");
+const cors = require('cors');
 const app = express();
+const path = require('path');
 
+app.set('views',path.join(__dirname, '/express-apis-frontend/views'));
+app.set('view engine','pug');
+app.use(cors({ origin: "http://localhost:4000" }));
 app.use(morgan("dev"));
 app.use(express.json());
 app.use('/tweets',tweetRouter);
